@@ -2,7 +2,6 @@ pragma solidity ^0.4.19;
 
 contract ZombieFactory {
 
-    // declare our event here
     event NewZombie(uint zombieId, string name, uint dna);
 
     uint dnaDigits = 16;
@@ -15,11 +14,14 @@ contract ZombieFactory {
 
     Zombie[] public zombies;
 
+    mapping (uint => address) public zombieToOwner;
+    mapping (address => uint) ownerZombieCount;
+
     function _createZombie(string _name, uint _dna) private {
-        uint id  = zombies.push(Zombie(_name, _dna)) - 1;
-        // and fire it here
+        uint id = zombies.push(Zombie(_name, _dna)) - 1;
+        // start here
         NewZombie(id, _name, _dna);
-    } 
+    }
 
     function _generateRandomDna(string _str) private view returns (uint) {
         uint rand = uint(keccak256(_str));
@@ -32,6 +34,7 @@ contract ZombieFactory {
     }
 
 }
+
 
 
 //https://share.cryptozombies.io/en/lesson/1/share/bibibobo?id=Z2l0aHVifDEwMDIxOTM0
