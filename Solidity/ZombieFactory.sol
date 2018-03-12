@@ -27,3 +27,5 @@ contract ZombieFactory {
         _createZombie(_name, randDna);
     }
 }
+
+//https://share.cryptozombies.io/en/lesson/1/share/bibibobo?id=Z2l0aHVifDEwMDIxOTM0
