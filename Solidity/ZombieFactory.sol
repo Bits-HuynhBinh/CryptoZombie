@@ -50,3 +50,4 @@ contract ZombieFactory is Ownable {
 
 
 //https://share.cryptozombies.io/en/lesson/1/share/bibibobo?id=Z2l0aHVifDEwMDIxOTM0
+//https://share.cryptozombies.io/en/lesson/3/share/bibibobo?id=Z2l0aHVifDEwMDIxOTM0
