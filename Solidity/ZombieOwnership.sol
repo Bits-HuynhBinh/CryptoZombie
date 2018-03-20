@@ -2,8 +2,12 @@ pragma solidity ^0.4.19;
 
 import "./zombieattack.sol";
 import "./erc721.sol";
+import "./safemath.sol";
 
+/// TODO: Replace this with natspec descriptions
 contract ZombieOwnership is ZombieAttack, ERC721 {
+
+  using SafeMath for uint256;
 
   mapping (uint => address) zombieApprovals;
 
@@ -16,8 +20,8 @@ contract ZombieOwnership is ZombieAttack, ERC721 {
   }
 
   function _transfer(address _from, address _to, uint256 _tokenId) private {
-    ownerZombieCount[_to]++;
-    ownerZombieCount[_from]--;
+    ownerZombieCount[_to] = ownerZombieCount[_to].add(1);
+    ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].sub(1);
     zombieToOwner[_tokenId] = _to;
     Transfer(_from, _to, _tokenId);
   }
@@ -32,7 +36,6 @@ contract ZombieOwnership is ZombieAttack, ERC721 {
   }
 
   function takeOwnership(uint256 _tokenId) public {
-    // Start here
     require(zombieApprovals[_tokenId] == msg.sender);
     address owner = ownerOf(_tokenId);
     _transfer(owner, msg.sender, _tokenId);
